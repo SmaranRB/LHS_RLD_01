@@ -1,0 +1,5 @@
+Main Logic 3x3:
+Combination (1,4), (2,4), (3,5) - Cards 2 and 3 are not perfest
+2 is shouwing 3's img and vice versa
+###############################################################
+^FIXED
