@@ -5,7 +5,7 @@ import mysql.connector as m
 pygame.init()
 width, height = 1280, 720
 screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption('Autismo iLearner')
+pygame.display.set_caption('Autism iLearner')
 
 passwd = 'Ac!$rB*6MySQL'
 
