@@ -14,7 +14,7 @@ else:
     def push_data(game, t_time, date = round(time.time(),3)):
         
         cs = Server.cursor()
-        cs.execute("insert into user2 values ( '%s' , %d , now() )"%(game,t_time))
+        cs.execute("insert into user1 values ( '%s' , %d , now() )"%(game,t_time))
         #cs.execute("insert into user1 values ( '%s' , %d , now() )"%(game,sum(L)))
         Server.commit()
         cs.close()

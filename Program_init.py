@@ -9,7 +9,7 @@ width, height = 1280, 720
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Autism iLearner')
 
-passwd = 'Ac!$rB*6MySQL'
+passwd = 'sql_password123'
 
 #Colors
 
@@ -38,24 +38,25 @@ Back_txt = 'Back'
 Back_Button = Font2.render(Back_txt, True, White)
 Back_Button_Rect = Back_Button.get_rect(center = (width//5,19*height//20))
 
-def sql_data_creation():
-    try:
-        con = m.connect(
-            host = 'localhost',
-            user = 'root',
-            password = passwd)
 
-        mycursor = con.cursor()
+try:
+    con = m.connect(
+        host = 'localhost',
+        user = 'root',
+        password = passwd)
 
-        mycursor.execute('create database if not exists autism')
-        mycursor.execute('use autism')
-        mycursor.execute('''create table if not exists user1
-                         (game varchar(15), t_time int(5), date datetime default now())''')
+    mycursor = con.cursor()
 
-    except Exception as e:
-        print(e)
+    mycursor.execute('create database if not exists autism')
+    mycursor.execute('use autism')
+    mycursor.execute('''create table if not exists user1
+                        (game varchar(15), t_time int(5), date datetime default now())''')
 
-sql_data_creation()
+except Exception as e:
+    print(e)
+
+else:
+    con.close()
 
 def fade(width, height,bg, prog = 'in'): 
 
