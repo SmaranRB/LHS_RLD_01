@@ -17,7 +17,7 @@ def OBC():
     # pygame.mixer.music.play(-1)
 
     #background---------------------------------------------------------------------
-    bg = pygame.image.load('Obstacle_Course_Assets\\Bg Image 0.png').convert_alpha()
+    bg = pygame.image.load('Obstacle_Course_Assets\\Bg Image 1.png').convert_alpha()
     bg_img = pygame.transform.scale(bg, (width, height))
     bg_x = 0
 
@@ -32,7 +32,7 @@ def OBC():
         
     #Sprite-------------------------------------------------------------------------
     xsize,ysize = 104,127
-    x_pos, y_pos = width/10,500
+    x_pos, y_pos = width/10,550
     sprite_list = [
         pygame.image.load(r"Obstacle_Course_Assets\Sprite animations\Run__000.png").convert_alpha(),
         pygame.image.load(r"Obstacle_Course_Assets\Sprite animations\Run__001.png").convert_alpha(),
@@ -54,9 +54,9 @@ def OBC():
         sprite_yacceleration = 0.2
         sprite_yspeed += sprite_yacceleration
         sprite_rect.centery += sprite_yspeed
-        if sprite_rect.centery >= 500:         #To prevent sprite from going further down
+        if sprite_rect.centery >= 550:         #To prevent sprite from going further down
             sprite_yspeed = 0
-            sprite_rect.centery = 500
+            sprite_rect.centery = 550
         y_pos = sprite_rect.centery 
 
     #ScreenBoundary Collisions-----------------------------------------------------
@@ -70,10 +70,10 @@ def OBC():
     block = pygame.transform.scale(block, (75,200))
     block_list = []
     load_new_pipe = pygame.USEREVENT
-    pygame.time.set_timer(load_new_pipe, 2000)      #A timer to add new blocks
+    pygame.time.set_timer(load_new_pipe, 1500)      #A timer to add new blocks
 
     def random_block():
-        block_y = random.randrange(0,500)
+        block_y = random.randrange(0,550)
         block_rect = block.get_rect(center = (width+10,block_y))
         return block_rect
 
@@ -127,7 +127,7 @@ def OBC():
         if sprite_count == len(sprite_list):
             sprite_count = 0
         
-        if sprite_rect.centery < 500:
+        if sprite_rect.centery < 550:
             sprite = pygame.transform.scale(Jumpsprite, (xsize,ysize))
             #clock.tick(140)
 

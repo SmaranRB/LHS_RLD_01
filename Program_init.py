@@ -9,7 +9,7 @@ width, height = 1280, 720
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Autism iLearner')
 
-passwd = 'sql_password123'
+passwd = ''
 
 #Colors
 
