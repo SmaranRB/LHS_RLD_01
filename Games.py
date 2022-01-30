@@ -30,6 +30,11 @@ Progress_txt = 'Bar'
 Progress_Button = Font2.render(Progress_txt, True, White)
 Progress_Button_Rect = Progress_Button.get_rect(center = (4.15*width//5,19*height//20))
 
+#Demo
+Demo_txt = 'Demo'
+Demo_Button = Font2.render(Demo_txt, True, White)
+Demo_Button_Rect = Demo_Button.get_rect(center = (width//2,19*height//20))
+
 #Quit
 Quit_txt = 'Quit'
 Quit_Button = Font2.render(Quit_txt, True, Red)
@@ -38,7 +43,7 @@ Quit_Button_Rect = Quit_Button.get_rect(center = (width//5,19*height//20))
 #MainLoop
 
 pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(1)
+pygame.mixer.music.set_volume(0)
 
 #fade(width, height,bg, 'out')
 fade(width, height,bg)
@@ -54,16 +59,24 @@ while True:
             #Mouseclicks and buttons
             if Dnd_Button_Rect.collidepoint(mx, my) == True:
                 exec(open('Dnd_main.py').read())
+
             elif Maze_Button_Rect.collidepoint(mx, my) == True:
                 exec(open('Maze.py').read())
+            
             elif Memory_cards_Button_Rect.collidepoint(mx, my) == True:
                 exec(open('Memory_Cards.py').read())
+            
             elif Ob_course_Button_Rect.collidepoint(mx, my) == True:
                 pygame.mixer.music.set_volume(0.3)
                 exec(open('ObstacleCourse.py').read())
                 pygame.mixer.music.set_volume(1)
+            
             elif Progress_Button_Rect.collidepoint(mx, my) == True:
                 exec(open('Progress_Report.py').read())
+            
+            elif Demo_Button_Rect.collidepoint(mx,my):
+                w.open('https://www.youtube.com/watch?v=x5Udg77RMeY')
+            
             elif Quit_Button_Rect.collidepoint(mx, my) == True:
                 pygame.quit()
                 sys.exit()
@@ -72,6 +85,7 @@ while True:
     Maze_Button = Hover_color_change(Maze_txt, Maze_Button_Rect)
     Memory_cards_Button = Hover_color_change(Memory_cards_txt, Memory_cards_Button_Rect)
     Ob_course_Button = Hover_color_change(Ob_course_txt, Ob_course_Button_Rect)
+    Demo_Button = Hover_color_change(Demo_txt, Demo_Button_Rect)
     Quit_Button = Hover_color_change(Quit_txt, Quit_Button_Rect, Red)
     
     #Displaying text
@@ -82,5 +96,6 @@ while True:
     screen.blit(Memory_cards_Button, Memory_cards_Button_Rect)
     screen.blit(Ob_course_Button, Ob_course_Button_Rect)
     screen.blit(Progress_Image, Progress_Button_Rect)
+    screen.blit(Demo_Button, Demo_Button_Rect)
     screen.blit(Quit_Button, Quit_Button_Rect)
     pygame.display.update()

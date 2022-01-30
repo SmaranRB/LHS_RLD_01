@@ -11,7 +11,7 @@ def main():
 
    Server = m.connect( host='localhost', user='root', passwd=Init.passwd, db='autism')
    cs = Server.cursor()
-   game = "select t_time from user1 where game = '%s' order by date desc limit 5"
+   game = "select t_time from user2 where game = '%s' order by date desc limit 5"
 
    '''_dnd = cs.execute(game%'dnd')
    dnd = cs.fetchall()
@@ -21,6 +21,17 @@ def main():
    maz = cs.fetchall()'''
 
    #print(dnd,mmc,maz)
+
+   def Del(Game):
+
+      command = "select date from user2 where game = '%s' order by date desc limit 5"%Game
+      cs.execute(command)
+      List = cs.fetchall()
+      print(List,'\n')
+      Del = 'delete from user2 where date not in '+str(tuple(List))
+      #print(Del)
+      #cs.execute(Del)
+      #Server.commit()
 
    def vals(Name, Str):
       com = cs.execute(game%Name)
@@ -42,6 +53,10 @@ def main():
 
    pygame.init()
    run = True
+   Del('mmc')
+   Del('maz')
+   Del('dnd')
+   Del('obc')
    while run:
 
       mx, my = pygame.mouse.get_pos() #  MOUSE co-ordinates   

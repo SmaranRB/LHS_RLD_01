@@ -2,6 +2,8 @@ import pygame
 import sys
 import random
 import mysql.connector as m
+import webbrowser as w
+
 pygame.init()
 width, height = 1280, 720
 screen = pygame.display.set_mode((width, height))
