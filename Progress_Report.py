@@ -22,8 +22,6 @@ def main():
 
    #print(dnd,mmc,maz)
 
-
-
    def vals(Name, Str):
       com = cs.execute(game%Name)
       List = cs.fetchall()

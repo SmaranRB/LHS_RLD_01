@@ -15,13 +15,5 @@ else:
         
         cs = Server.cursor()
         cs.execute("insert into user1 values ( '%s' , %d , now() )"%(game,t_time))
-        #cs.execute("insert into user1 values ( '%s' , %d , now() )"%(game,sum(L)))
         Server.commit()
         cs.close()
-    
-
-if __name__ == '__main__':
-
-    game = 'test123'
-    t_time = 10005
-    push_data(game, t_time)

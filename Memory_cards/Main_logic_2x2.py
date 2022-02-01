@@ -6,16 +6,38 @@ game = 'mmc'
 
 Path_addn = 'Memory_cards\\'
 
-def Background(screen,Bg_img, Width, Height):
-    Bg =  pygame.transform.scale(pygame.image.load(Path_addn + 'Assets\\Bg\\'+Bg_img+'.jpg').convert_alpha(),(Width,Height))
-    #screen =Load_Screen(Width, Height)#Loading background onto the window
-    screen.blit(Bg,(0,0))
-    
-    return Width,Height,Bg
+def Load_Screen(Width,Height): #Loads the window
 
-def Select_File(L):
+    screen = pygame.display.set_mode((Width,Height))
+    return screen
 
-    #L = ['Cards 1\\Green_Card','Cards 1\\Red_Card']
+def Assign_Num(File_Selected,File_Selected_2, Combination_Selected): #Assigns Numbers for each matching pair of cards for comparision 
+
+    Card1 = File_Selected
+    Card2 = File_Selected_2
+
+    if Combination_Selected == (1,2):
+            Tile_1_Num = Card1
+            Tile_2_Num = Card2
+            Tile_3_Num = Card2
+            Tile_4_Num = Card1
+
+    elif Combination_Selected == (2,3):
+            Tile_1_Num = Card1
+            Tile_2_Num = Card1
+            Tile_3_Num = Card2
+            Tile_4_Num = Card2
+
+    elif Combination_Selected == (1,3):
+            Tile_1_Num = Card1
+            Tile_2_Num = Card2
+            Tile_3_Num = Card1
+            Tile_4_Num = Card2
+        
+    return Tile_1_Num, Tile_2_Num, Tile_3_Num, Tile_4_Num
+
+def Select_File(L): #Selects the required image using the filenames in L 
+
     File_Selected = random.sample(L, 1)[0]
     if File_Selected == L[0]:
         File_Selected_2 = L[1]
@@ -25,14 +47,14 @@ def Select_File(L):
     
     return File_Selected, File_Selected_2 
 
-def Load_Images(Width,Height,screen,File_Selected,File_Selected_2):
+def Load_Images(Width,Height,screen,File_Selected,File_Selected_2): #Loads the required image using the filenames in L 
     
     L2 = [(1,2),(2,3),(1,3)]
     Combination_Selected = random.sample(L2,1)[0]
 
     Img_Size = (100,140)
 
-    if Combination_Selected == (1,2): # Elents in same column are same
+    if Combination_Selected == (1,2): # Elements in same column are same
         
         Tile_1 = pygame.transform.scale(pygame.image.load(Path_addn + 'Assets\\'+File_Selected+'.png').convert_alpha(), Img_Size)
         Tile_1_Rect = Tile_1.get_rect(center = (Width//3,Height//3))
@@ -79,7 +101,13 @@ def Load_Images(Width,Height,screen,File_Selected,File_Selected_2):
 
     return Combination_Selected, Grey_Tile, Tile_1,Tile_1_Rect , Tile_2,Tile_2_Rect , Tile_3,Tile_3_Rect , Tile_4,Tile_4_Rect
 
-def Flip_animation(screen, Grey_Tile, Tile , File_Selected, Tile_Rect, sec_Tile, sec_Tile_rect, sec_Tile_Match,sec_Tile_Click , tert_Tile, tert_Tile_rect , tert_Tile_Match, tert_Tile_Click,  quat_Tile, quat_Tile_rect  , quat_Tile_Match ,quat_Tile_Click , Dir , Bg):
+def Background(screen,Bg_img, Width, Height): #Loads and displays Background image
+    Bg =  pygame.transform.scale(pygame.image.load(Path_addn + 'Assets\\Bg\\'+Bg_img+'.jpg').convert_alpha(),(Width,Height))
+    screen.blit(Bg,(0,0))
+    
+    return Width,Height,Bg
+
+def Flip_animation(screen, Grey_Tile, Tile , File_Selected, Tile_Rect, sec_Tile, sec_Tile_rect, sec_Tile_Match,sec_Tile_Click , tert_Tile, tert_Tile_rect , tert_Tile_Match, tert_Tile_Click,  quat_Tile, quat_Tile_rect  , quat_Tile_Match ,quat_Tile_Click , Dir , Bg): #Code for the flipping animation of the card when it is clicked
     
     Img_Size = (100,140)
     File_Selected_w = 'White_Card'
@@ -131,7 +159,7 @@ def Flip_animation(screen, Grey_Tile, Tile , File_Selected, Tile_Rect, sec_Tile,
     elif Dir == '-ve':
         Anim(L_Negative)
 
-def Mouse(screen,Bg,Grey_Tile,Tile_1,Tile_1_Rect,Width,Height,Tile_2,Tile_2_Rect, Tile_1_Num,Tile_2_Num,Tile_3_Num,Tile_4_Num, Tile_3,Tile_3_Rect, Tile_4,Tile_4_Rect, Click1, Click2, Click3, Click4, Tile_1_Match,Tile_2_Match,Tile_3_Match,Tile_4_Match):
+def Mouse(screen,Bg,Grey_Tile,Tile_1,Tile_1_Rect,Width,Height,Tile_2,Tile_2_Rect, Tile_1_Num,Tile_2_Num,Tile_3_Num,Tile_4_Num, Tile_3,Tile_3_Rect, Tile_4,Tile_4_Rect, Click1, Click2, Click3, Click4, Tile_1_Match,Tile_2_Match,Tile_3_Match,Tile_4_Match): #Checks mouse cursor and displays the cards that have been clicked
 
     Mouse_Pos = pygame.mouse.get_pos()
     Click = pygame.mouse.get_pressed()[0]
@@ -146,7 +174,7 @@ def Mouse(screen,Bg,Grey_Tile,Tile_1,Tile_1_Rect,Width,Height,Tile_2,Tile_2_Rect
                 if Click:
                     screen.blit(Tile, Tile_Rect)
                     Tile_Click = 1
-                    #Flip_animation(screen, Grey_Tile, Tile_1, Tile_1_Num, Tile_1_Rect , Tile_2,Tile_2_Rect,Tile_2_Match,Click2, Tile_3,Tile_3_Rect,Tile_3_Match,Click3, Tile_4, Tile_4_Rect,Tile_4_Match,Click4 , '+ve', Bg)
+                    
                     Flip_animation(screen, Grey_Tile, Tile, Tile_Num, Tile_Rect, sec_Tile, sec_Tile_rect, sec_Tile_Match, sec_Tile_Click, tert_Tile, tert_Tile_rect, tert_Tile_Match, tert_Tile_Click, quat_Tile, quat_Tile_rect, quat_Tile_Match, quat_Tile_Click, '+ve', Bg)
 
                 elif Tile_Click == 1:
@@ -174,32 +202,7 @@ def Mouse(screen,Bg,Grey_Tile,Tile_1,Tile_1_Rect,Width,Height,Tile_2,Tile_2_Rect
 
     return Click1, Click2, Click3, Click4
 
-def Assign_Num(File_Selected,File_Selected_2, Combination_Selected):
-
-    Card1 = File_Selected
-    Card2 = File_Selected_2
-
-    if Combination_Selected == (1,2):
-            Tile_1_Num = Card1
-            Tile_2_Num = Card2
-            Tile_3_Num = Card2
-            Tile_4_Num = Card1
-
-    elif Combination_Selected == (2,3):
-            Tile_1_Num = Card1
-            Tile_2_Num = Card1
-            Tile_3_Num = Card2
-            Tile_4_Num = Card2
-
-    elif Combination_Selected == (1,3):
-            Tile_1_Num = Card1
-            Tile_2_Num = Card2
-            Tile_3_Num = Card1
-            Tile_4_Num = Card2
-        
-    return Tile_1_Num, Tile_2_Num, Tile_3_Num, Tile_4_Num
-
-def Compare(Bg,Grey_Tile, screen, Click1,Click2,Click3,Click4, Combination_Selected, Tile_1,Tile_2,Tile_3,Tile_4, Tile_1_Num,Tile_2_Num,Tile_3_Num,Tile_4_Num, Tile_1_Rect,Tile_2_Rect,Tile_3_Rect,Tile_4_Rect, Tile_1_Match , Tile_2_Match , Tile_3_Match , Tile_4_Match):
+def Compare(Bg,Grey_Tile, screen, Click1,Click2,Click3,Click4, Combination_Selected, Tile_1,Tile_2,Tile_3,Tile_4, Tile_1_Num,Tile_2_Num,Tile_3_Num,Tile_4_Num, Tile_1_Rect,Tile_2_Rect,Tile_3_Rect,Tile_4_Rect, Tile_1_Match , Tile_2_Match , Tile_3_Match , Tile_4_Match): #Compares the pair of cards that have been clicked to see if they match or not
 
     Delay = 700
 
@@ -220,10 +223,10 @@ def Compare(Bg,Grey_Tile, screen, Click1,Click2,Click3,Click4, Combination_Selec
                 pygame.display.update()
 
                 pygame.time.delay(Delay)
-                #Flip_animation(screen, Grey_Tile, Tile_1, Tile_1_Num, Tile_1_Rect , Tile_2,Tile_2_Rect,Tile_2_Match,Click2, Tile_3,Tile_3_Rect,Tile_3_Match,Click3, Tile_4, Tile_4_Rect,Tile_4_Match,Click4 , '-ve', Bg)
+                
                 Flip_animation(screen, Grey_Tile, Tile, Tile_Num, Tile_rect, Tile2, Tile2_rect, Tile2_Match, Tile2_Click, tert_Tile, tert_Tile_rect, tert_Tile_Match, tert_Tile_Click, quat_Tile, quat_Tile_rect, quat_Tile_Match, quat_Tile_Click, '-ve', Bg)
                 Tile_Click = 0
-                #Flip_animation(screen, Grey_Tile, Tile_4, Tile_4_Num, Tile_4_Rect , Tile_1,Tile_1_Rect,Tile_1_Match,Click1 , Tile_3,Tile_3_Rect,Tile_3_Match,Click3, Tile_2, Tile_2_Rect,Tile_2_Match,Click2, '-ve', Bg)
+                
                 Flip_animation(screen, Grey_Tile, Tile2, Tile2_Num, Tile2_rect, Tile, Tile_rect, Tile_Match, Tile_Click, tert_Tile, tert_Tile_rect, tert_Tile_Match, tert_Tile_Click, quat_Tile, quat_Tile_rect, quat_Tile_Match, quat_Tile_Click, '-ve', Bg)
                 Tile2_Click = 0
 
@@ -240,12 +243,7 @@ def Compare(Bg,Grey_Tile, screen, Click1,Click2,Click3,Click4, Combination_Selec
 
     return Click1, Click2 ,Click3 ,Click4 , Tile_1_Match,Tile_2_Match,Tile_3_Match,Tile_4_Match
 
-def Load_Screen(Width,Height): #Loading the window
-
-    screen = pygame.display.set_mode((Width,Height))
-    return screen
-
-def Win(Tile_1_Match,Tile_2_Match,Tile_3_Match,Tile_4_Match, screen,Width,Height):
+def Win(Tile_1_Match,Tile_2_Match,Tile_3_Match,Tile_4_Match, screen,Width,Height): #Code to be executed when the player wins a level
 
     if Tile_1_Match == Tile_2_Match == Tile_3_Match == Tile_4_Match == True:
 
@@ -258,7 +256,7 @@ def Win(Tile_1_Match,Tile_2_Match,Tile_3_Match,Tile_4_Match, screen,Width,Height
         pygame.time.delay(2000)
         return 'Win +ve'
 
-def main(L,Bg_img,screen):
+def main(L,Bg_img,screen): #Main Loop
 
     Width,Height,Bg= Background(screen,Bg_img,1280,720)
 
@@ -305,12 +303,3 @@ def main(L,Bg_img,screen):
 
         if Win_Check == 'Win +ve':
             break
-
-if __name__ == '__main__':
-
-    Path_addn = ''
-    
-    screen = Load_Screen(1280,720)
-    pygame.mixer.music.play(-1)
-    main(['Cards 1\\Green_Card','Cards 1\\Red_Card'],'Bg',screen)
-    pygame.quit()
