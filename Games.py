@@ -43,7 +43,7 @@ Quit_Button_Rect = Quit_Button.get_rect(center = (width//5,19*height//20))
 #MainLoop
 
 pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0)
+pygame.mixer.music.set_volume(1)
 
 fade(width, height,bg)
 
