@@ -111,6 +111,7 @@ def Maze():
 					GameTime = round(EndTime - StarTime,3)
 					GameTimeList.append(GameTime)
 					clock.tick(0.3)
+					pygame.mouse.set_pos([0,0])
 
 
 				#Collision with the yellow blocks
