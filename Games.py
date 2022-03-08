@@ -74,7 +74,7 @@ while True:
                 exec(open('Progress_Report.py').read())
             
             elif Demo_Button_Rect.collidepoint(mx,my):
-                w.open('https://www.youtube.com/watch?v=x5Udg77RMeY')
+                w.open('https://youtube.com/playlist?list=PLweYusywwlRvdVvDjWPaM3EkgDecU0d6i')
             
             elif Quit_Button_Rect.collidepoint(mx, my) == True:
                 pygame.quit()
